@@ -34,19 +34,19 @@ PET_CHOICES = (
 class Pet(BaseModel):
     name = models.CharField(max_length=128)
     pet_type = models.CharField(max_length=30, choices=PET_CHOICES)
-    image = models.ImageField(upload_to="media/pet", null=True, blank=False)
+    image = models.ImageField(upload_to="media/pet", null=True, blank=True)
     age = models.FloatField()
     weight = models.FloatField()
 
-    purchased_date = models.DateField(blank=False)
-    purchased_price = models.CharField(max_length=32, null=True, blank=False)
+    purchased_date = models.DateField(null=True, blank=True)
+    purchased_price = models.CharField(max_length=32, null=True, blank=True)
 
-    sold_out_date = models.DateField(null=True, blank=False)
+    sold_out_date = models.DateField(null=True, blank=True)
     sold_out_price = models.CharField(
         max_length=32, null=True, blank=True)
 
     is_sale = models.BooleanField(default=False)
-    sale_price = models.CharField(max_length=32, null=True, blank=False)
+    sale_price = models.CharField(max_length=32, null=True, blank=True)
 
     staff = models.ForeignKey(
         Staff, on_delete=models.DO_NOTHING, related_name="pet")

@@ -30,4 +30,4 @@ class Staff(BaseModel):
     telegram = models.CharField(max_length=128, null=True, blank=True)
 
     def __str__(self):
-        return self.username
+        return self.full_name

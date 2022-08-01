@@ -15,13 +15,13 @@ PRODUCT_CHOICES = (
 
 
 class Product(BaseModel):
-    title = models.CharField(max_length=128, null=True, blank=False)
-    description = models.TextField(null=True, blank=False)
+    title = models.CharField(max_length=128, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
     product_type = models.CharField(choices=PRODUCT_CHOICES, max_length=32)
+    quantity = models.CharField(max_length=32, null=True, blank=True)
 
     pet = models.ForeignKey(
         Pet, on_delete=models.DO_NOTHING, related_name='product')
-
     staff = models.ForeignKey(
         Staff, on_delete=models.DO_NOTHING, related_name="product")
 
@@ -30,18 +30,18 @@ class Product(BaseModel):
         max_length=32, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.date} kun /{self.liters} liter sut"
+        return f"{self.published_date} kun /{self.liters} liter sut"
 
 
 class ProductRecycled(BaseModel):
-    product = models.ForeignKey(
-        Product, on_delete=models.DO_NOTHING, related_name="product_recycled")
-
-    title = models.CharField(max_length=128, null=True, blank=False)
+    title = models.CharField(max_length=128, null=True, blank=True)
     description = models.TextField(null=True, blank=False)
     image = models.ImageField(
-        upload_to="media/product_recycled", null=True, blank=False)
-    price = models.CharField(max_length=32, null=True, blank=False)
+        upload_to="media/product_recycled", null=True, blank=True)
+
+    product = models.ForeignKey(
+        Product, on_delete=models.DO_NOTHING, related_name="product_recycled")
+    price = models.CharField(max_length=32, null=True, blank=True)
 
     published_date = models.DateField(auto_now_add=True)
-    purchased_date = models.DateField(auto_now=True)
+    purchased_date = models.DateField(null=True, blank=True)
