@@ -43,6 +43,12 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_redis',
     'debug_toolbar',
+
+    # local
+    'common',
+    'account',
+    'main',
+    'product',
 ]
 
 MIDDLEWARE = [
@@ -89,6 +95,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
+AUTH_USER_MODEL = "common.user"
 
 
 # Database
