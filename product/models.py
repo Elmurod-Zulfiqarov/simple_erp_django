@@ -25,12 +25,12 @@ class Product(BaseModel):
     staff = models.ForeignKey(
         Staff, on_delete=models.DO_NOTHING, related_name="product")
 
-    published_date = models.DateField(auto_now_add=True)
+    published_date = models.DateField(auto_now=True)
     sold_out_price = models.CharField(
         max_length=32, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.published_date} kun /{self.liters} liter sut"
+        return f"{self.published_date} kun /{self.quantity} "
 
 
 class ProductRecycled(BaseModel):
@@ -44,4 +44,7 @@ class ProductRecycled(BaseModel):
     price = models.CharField(max_length=32, null=True, blank=True)
 
     published_date = models.DateField(auto_now_add=True)
-    purchased_date = models.DateField(null=True, blank=True)
+    purchased_price = models.CharField(max_length=32, null=True, blank=True)
+
+    def __str__(self):
+        return self.title

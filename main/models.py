@@ -19,6 +19,9 @@ class FAQ(BaseModel):
     question = models.CharField(max_length=512)
     answer = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return self.title
+
 
 BULL = "bull"
 COW = "cow"
