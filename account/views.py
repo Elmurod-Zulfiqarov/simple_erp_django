@@ -8,10 +8,9 @@ from .models import Staff
 
 
 class StaffViewSet(ModelViewSet):
-    queryset = Staff.objects.all()
     serializer_class = StaffSerializer
 
-    authentication_classes = (TokenAuthentication,)
+    # authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAdminUser,)
 
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
@@ -19,3 +18,6 @@ class StaffViewSet(ModelViewSet):
     ordering_fields = ("gender", "salary", "specialty")
 
     pagination_class = CustomPagination
+
+    def get_queryset(self):
+        return Staff.objects.all().select_related('user')

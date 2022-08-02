@@ -65,6 +65,8 @@ class Fodder(BaseModel):
     size = models.CharField(max_length=16, null=True, blank=False)
 
     purchased_date = models.DateField(auto_now=True)
+    staff = models.ForeignKey(
+        Staff, on_delete=models.DO_NOTHING, related_name="fodder")
 
     def __str__(self):
         return self.title

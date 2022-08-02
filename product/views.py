@@ -20,6 +20,9 @@ class ProductViewSet(ModelViewSet):
 
     pagination_class = CustomPagination
 
+    def get_queryset(self):
+        return Product.objects.select_related('pet', 'staff').all()
+
 
 class ProductRecycledViewSet(ModelViewSet):
     queryset = ProductRecycled.objects.all()
@@ -33,3 +36,6 @@ class ProductRecycledViewSet(ModelViewSet):
     ordering_fields = ("price", "published_date",)
 
     pagination_class = CustomPagination
+
+    def get_queryset(self):
+        return ProductRecycled.objects.prefetch_related('product')

@@ -39,8 +39,8 @@ class ProductRecycled(BaseModel):
     image = models.ImageField(
         upload_to="media/product_recycled", null=True, blank=True)
 
-    product = models.ForeignKey(
-        Product, on_delete=models.DO_NOTHING, related_name="product_recycled")
+    product = models.ManyToManyField(
+        Product, related_name="product_recycled")
     price = models.CharField(max_length=32, null=True, blank=True)
 
     published_date = models.DateField(auto_now_add=True)

@@ -24,7 +24,6 @@ class FAQViewSet(ModelViewSet):
 
 
 class FodderViewSet(ModelViewSet):
-    queryset = Fodder.objects.all()
     serializer_class = FodderSerializer
 
     authentication_classes = (TokenAuthentication,)
@@ -36,9 +35,11 @@ class FodderViewSet(ModelViewSet):
 
     pagination_class = CustomPagination
 
+    def get_queryset(self):
+        return Fodder.objects.select_related('staff').all()
+
 
 class PetViewSet(ModelViewSet):
-    queryset = Pet.objects.all()
     serializer_class = PetSerializer
 
     authentication_classes = (TokenAuthentication,)
@@ -50,3 +51,6 @@ class PetViewSet(ModelViewSet):
                        "purchased_price", "is_sale")
 
     pagination_class = CustomPagination
+
+    def get_queryset(self):
+        return Pet.objects.select_related('staff').all()
