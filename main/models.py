@@ -52,7 +52,7 @@ class Pet(BaseModel):
     sale_price = models.CharField(max_length=32, null=True, blank=True)
 
     staff = models.ForeignKey(
-        Staff, on_delete=models.DO_NOTHING, related_name="pet")
+        Staff, on_delete=models.CASCADE, related_name="pet")
 
     def __str__(self):
         return self.name
@@ -66,7 +66,7 @@ class Fodder(BaseModel):
 
     purchased_date = models.DateField(auto_now=True)
     staff = models.ForeignKey(
-        Staff, on_delete=models.DO_NOTHING, related_name="fodder")
+        Staff, on_delete=models.CASCADE, related_name="fodder")
 
     def __str__(self):
         return self.title

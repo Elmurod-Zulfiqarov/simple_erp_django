@@ -21,9 +21,9 @@ class Product(BaseModel):
     quantity = models.CharField(max_length=32, null=True, blank=True)
 
     pet = models.ForeignKey(
-        Pet, on_delete=models.DO_NOTHING, related_name='product')
+        Pet, on_delete=models.CASCADE, related_name='product')
     staff = models.ForeignKey(
-        Staff, on_delete=models.DO_NOTHING, related_name="product")
+        Staff, on_delete=models.CASCADE, related_name="product")
 
     published_date = models.DateField(auto_now=True)
     sold_out_price = models.CharField(
